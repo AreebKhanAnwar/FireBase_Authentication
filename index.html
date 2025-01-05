@@ -1,54 +1,175 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/SignUp</title>
+    <title>Sign-In and Sign-Up</title>
+
+    <!-- Basic Styling and Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 90%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #0072ff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0072ff;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-toggle {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-toggle a {
+            color: #0072ff;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sign-Up / Sign-In Form Transition */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .form-container .form {
+            display: none;
+        }
+
+        .form-container .form.active {
+            display: block;
+        }
+
+    </style>
 </head>
 
 <body>
-    <form id="signup_form">
-        <label for="email">Email
-            <input type="email" id="email">
-        </label> <br><br>
-        <label for="password">Password
-            <input type="password" id="password">
-        </label> <br><br>
-        <button type="submit">SignUp</button>
-    </form>
 
-<br>
+    <div class="container">
+        <div class="form-container">
+            <!-- Sign-Up Form -->
+            <form id="signup_form" class="form active">
+                <div class="form-header">
+                    <h2>Sign Up</h2>
+                    <p>Create your account</p>
+                </div>
+                <input type="email" id="signup_email" placeholder="Enter Email" required />
+                <input type="password" id="signup_password" placeholder="Enter Password" required />
+                <button type="submit">Sign Up</button>
+                <div class="form-toggle">
+                    <p>Already have an account? <a href="#" id="toggle_signin">Sign In</a></p>
+                </div>
+            </form>
+
+            <!-- Sign-In Form -->
+            <form id="signin_form" class="form">
+                <div class="form-header">
+                    <h2>Sign In</h2>
+                    <p>Welcome back, please log in</p>
+                </div>
+                <input type="email" id="signin_email" placeholder="Enter Email" required />
+                <input type="password" id="signin_password" placeholder="Enter Password" required />
+                <button type="submit">Sign In</button>
+                <div class="form-toggle">
+                    <p>Don't have an account? <a href="#" id="toggle_signup">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const toggleSignUp = document.getElementById('toggle_signup');
+        const toggleSignIn = document.getElementById('toggle_signin');
+        const signUpForm = document.getElementById('signup_form');
+        const signInForm = document.getElementById('signin_form');
+
+        toggleSignUp.addEventListener('click', (e) => {
+            e.preventDefault();
+            signUpForm.classList.add('active');
+            signInForm.classList.remove('active');
+        });
+
+        toggleSignIn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signInForm.classList.add('active');
+            signUpForm.classList.remove('active');
+        });
+    </script>
     <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
-</html>-->
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign-In and Sign-Up</title>
-</head>
-<body>
-  <!-- Sign-Up Form -->
-  <form id="signup_form">
-    <h2>Sign Up</h2>
-    <input type="email" id="signup_email" placeholder="Enter Email" required />
-    <input type="password" id="signup_password" placeholder="Enter Password" required />
-    <button type="submit">Sign Up</button>
-  </form>
-
-  <!-- Sign-In Form -->
-  <form id="signin_form">
-    <h2>Sign In</h2>
-    <input type="email" id="signin_email" placeholder="Enter Email" required />
-    <input type="password" id="signin_password" placeholder="Enter Password" required />
-    <button type="submit">Sign In</button>
-  </form>
-
-  <script type="module" src="app.js"></script>
-</body>
 </html>
